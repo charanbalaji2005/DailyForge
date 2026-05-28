@@ -6,6 +6,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 import PublicRoute from "./components/PublicRoute.jsx";
 import Footer from "./components/Footer.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import PageTransition from "./components/PageTransition.jsx";
 
 const Login = lazy(() => import("./pages/Login.jsx"));
@@ -38,7 +39,7 @@ const PageLoader = () => (
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
@@ -50,7 +51,9 @@ const AnimatedRoutes = () => {
           path="/dashboard"
           element={
             <ProtectedRoutes>
-              <PageTransition><Dashboard /></PageTransition>
+              <ErrorBoundary>
+                <PageTransition><Dashboard /></PageTransition>
+              </ErrorBoundary>
             </ProtectedRoutes>
           }
         />
@@ -58,7 +61,9 @@ const AnimatedRoutes = () => {
           path="/tasks"
           element={
             <ProtectedRoutes>
-              <PageTransition><Tasks /></PageTransition>
+              <ErrorBoundary>
+                <PageTransition><Tasks /></PageTransition>
+              </ErrorBoundary>
             </ProtectedRoutes>
           }
         />
@@ -66,7 +71,9 @@ const AnimatedRoutes = () => {
           path="/routine-builder"
           element={
             <ProtectedRoutes>
-              <PageTransition><RoutineBuilder /></PageTransition>
+              <ErrorBoundary>
+                <PageTransition><RoutineBuilder /></PageTransition>
+              </ErrorBoundary>
             </ProtectedRoutes>
           }
         />
